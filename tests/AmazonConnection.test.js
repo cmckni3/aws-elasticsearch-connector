@@ -133,7 +133,7 @@ describe('AmazonConnection', function () {
       }
     })
 
-    it('sets the Host header without the port appended', function () {
+    it('sets the host header without the port appended', function () {
       const req = connector.buildRequestObject({
         method: 'GET',
         path: '/_cluster/health',
@@ -142,7 +142,7 @@ describe('AmazonConnection', function () {
         headers: {}
       })
 
-      assert.strictEqual(req.headers.Host, 'foo.us-east-1.es.amazonaws.com')
+      assert.strictEqual(req.headers['host'], 'foo.us-east-1.es.amazonaws.com')
     })
 
     it('sets the content-length: 0 header when there is no body', function () {
