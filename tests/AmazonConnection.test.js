@@ -145,7 +145,7 @@ describe('AmazonConnection', function () {
       assert.strictEqual(req.headers.Host, 'foo.us-east-1.es.amazonaws.com')
     })
 
-    it('sets the Content-Length: 0 header when there is no body', function () {
+    it('sets the content-length: 0 header when there is no body', function () {
       const req = connector.buildRequestObject({
         method: 'POST',
         path: '/_cluster/health',
@@ -154,10 +154,10 @@ describe('AmazonConnection', function () {
         headers: {}
       })
 
-      assert.strictEqual(req.headers['Content-Length'], 0)
+      assert.strictEqual(req.headers['content-length'], 0)
     })
 
-    it('sets the Content-Length header when there is a body', function () {
+    it('sets the content-length header when there is a body', function () {
       const req = connector.buildRequestObject({
         method: 'POST',
         path: '/_cluster/health',
@@ -166,7 +166,7 @@ describe('AmazonConnection', function () {
         headers: {}
       })
 
-      assert.strictEqual(req.headers['Content-Length'], 3)
+      assert.strictEqual(req.headers['content-length'], 3)
       assert.strictEqual(req.body, 'foo')
     })
 
