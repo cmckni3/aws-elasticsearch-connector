@@ -25,6 +25,8 @@ class AmazonConnection extends Connection {
 
   buildRequestObject (params) {
     const req = super.buildRequestObject(params)
+    req.service = 'es';
+    req.region = get(this.awsConfig, 'region', process.env.AWS_REGION);
 
     if (!req.headers) {
       req.headers = {}
@@ -32,7 +34,7 @@ class AmazonConnection extends Connection {
 
     // Fix the Host header, since HttpConnector.makeReqParams() appends
     // the port number which will cause signature verification to fail
-    req.headers.Host = req.hostname
+    req.headers['Host'] = req.hostname
 
     if (params.body) {
       req.headers['Content-Length'] = Buffer.byteLength(params.body, 'utf8')
@@ -41,7 +43,7 @@ class AmazonConnection extends Connection {
       req.headers['Content-Length'] = 0
     }
 
-    return aws4.sign(req, this.credentials)
+    return aws4.sign(req, this.credentials);
   }
 }
 
